@@ -1,0 +1,64 @@
+﻿<Window x:Class="WpfSlidingPage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSlidingPage"
+        xmlns:controls="clr-namespace:WpfSlidingPage.Controls"
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized" Loaded="Window_Loaded">
+    <Window.Resources>
+        <VisualBrush x:Key="MyVisualBrush" TileMode="Tile" Viewport="0,0,15,15" ViewportUnits="Absolute" Viewbox="0,0,15,15" ViewboxUnits="Absolute">
+            <VisualBrush.Visual>
+                <Grid Background="Black">
+                    <Path Data="M 0 15 L 15 0" Stroke="Gray" />
+                    <Path Data="M 0 0 L 15 15" Stroke="Gray" />
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <ImageBrush x:Key="ImageBackground"  ImageSource="Images/FlowersToRepeat.png"/>
+
+        <VisualBrush x:Key="ImageBackgroundVisualBrush" TileMode="Tile" Stretch="Fill" Viewport="0,0,.1,.35" Viewbox="0,0,1,1" ViewportUnits="RelativeToBoundingBox" ViewboxUnits="RelativeToBoundingBox">
+            <VisualBrush.Visual>
+                <Image Source="Images/Bubbles.png" />
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.Resources>
+    <Grid Background="{StaticResource ImageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="89*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,120,0" Orientation="Horizontal">
+            <TextBox Name="IndexTextBox" Text="2" Width="50" HorizontalAlignment="Left"/>
+            <Button Name="RemoveButton" Content="_Remove" Click="RemoveButtonClick" Grid.Row="0" Width="100" Margin="10,0,0,0"/>
+            <ComboBox Name="BackgroundCombo" Width="100" SelectedIndex="0" Margin="100,0,0,0">
+                <ComboBoxItem>BlueFlowers</ComboBoxItem>
+                <ComboBoxItem>Bubbles</ComboBoxItem>
+                <ComboBoxItem>FlowersToRepeat</ComboBoxItem>
+                <ComboBoxItem>Illussion</ComboBoxItem>
+                <ComboBoxItem>Lightning</ComboBoxItem>
+                <ComboBoxItem>SlingleFlower</ComboBoxItem>
+                <ComboBoxItem>TechnologyTrending</ComboBoxItem>
+                <ComboBoxItem>WhiteFlowers</ComboBoxItem>
+            </ComboBox>
+            <Button Name="SetBackgroundButton" Content="_Apply" Click="SetBackgroundButtonClick" Grid.Row="0" Width="100" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <Button Name="AddButton" Content="_Add" Grid.Column="1" Click="AddButtonClick" Grid.Row="0" Width="100" Margin="2" HorizontalAlignment="Right"/>
+        
+        <Grid Grid.Column="1" Grid.Row="1" >
+            <controls:SlideView x:Name="slideView" ItemsPerPage="16" ItemSource="{Binding SlidingItems}"/>
+        </Grid>
+        
+    </Grid>
+</Window>
